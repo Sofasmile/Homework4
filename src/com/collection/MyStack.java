@@ -2,7 +2,7 @@ package collection;
 
 public class MyStack<T> {
     private NodeStack<T> head;
-    int size;
+    private int size;
 
     public MyStack() {
         head = new NodeStack<>(null, null);
@@ -80,9 +80,6 @@ public class MyStack<T> {
     public void show() {
         NodeStack<T> item = head;
         for (int i = 0; i < size; i++) {
-            if (item == null) {
-                return;
-            }
             System.out.print(item.data + " ");
             item = item.next;
         }

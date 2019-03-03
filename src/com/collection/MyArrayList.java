@@ -17,27 +17,27 @@ public class MyArrayList<T> implements List<T> {
     @Override
     public void add(T value) {
         if (size == arrays.length) {
-            increazeSize();
+            increaseSize();
         }
         arrays[size++] = value;
     }
 
-    private void increazeSize() {
+    private void increaseSize() {
         T[] newArray = (T[]) new Object[(int) (arrays.length * 1.5)];
-        System.arraycopy(arrays, 0, newArray, 0, size);//////+1??
+        System.arraycopy(arrays, 0, newArray, 0, size);
         arrays = newArray;
     }
 
     @Override
     public void remove(int i) {
-        if (i >= size || i < 0) {
-            System.out.println("Index " + i + " is out of bound!");
-        } else {
+        try{
             T[] newArray = (T[]) new Object[size - 1];
             System.arraycopy(arrays, 0, newArray, 0, i);
             System.arraycopy(arrays, i + 1, newArray, i, size - i - 1);
             size--;
             arrays = newArray;
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("Index is out of bound!");
         }
     }
 
@@ -53,11 +53,11 @@ public class MyArrayList<T> implements List<T> {
 
     @Override
     public T get(int i) {
-        if (i < 0 || i >= size) {
-            System.out.println("Index " + i + " is out of bound!");
-            return null;
-        } else {
+        try{
             return arrays[i];
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("Index  is out of bound!");
+            return null;
         }
     }
 

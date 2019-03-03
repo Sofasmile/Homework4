@@ -25,16 +25,20 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public void remove(int i) {
-        Node<T> x = getNode(i);
-        if (x != null) {
-            remove(x);
+        try {
+            Node<T> x = getNode(i);
+            if (x != null) {
+                remove(x);
+            }
+        } catch (Exception e) {
+            System.out.println("Can't remove element with this index");
         }
     }
 
     private void remove(Node<T> node) {
         Node<T> prev = node.prev;
         Node<T> next = node.next;
-        if (prev == null) {
+        if (prev.data == null) {
             first = node.next;
         } else if (next == null) {
             last = node.prev;
@@ -49,10 +53,9 @@ public class MyLinkedList<T> implements List<T> {
 
     }
 
-    private Node<T> getNode(int index) {
+    private Node<T> getNode(int index) throws Exception {
         if (index < 0 || index >= size) {
-            System.out.println("Index " + index + " is out of bound!");
-            return null;
+            throw new Exception("Index is out of bound!");
         } else if (index < size / 2) {
             Node<T> item = first;
             for (int i = 0; i < index; i++) {
@@ -83,18 +86,19 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public T get(int i) {
-        return getNode(i).data;
+        try {
+            return getNode(i).data;
+        } catch (Exception e) {
+            System.out.println("Can't remove element with this index");
+            return null;
+        }
     }
 
     public void show() {
         Node<T> iterator = first;
         for (int i = 0; i < size; i++) {
-            if (iterator == null) {
-                return;
-            } else {
-                System.out.print("" + iterator.data + " ");
-                iterator = iterator.next;
-            }
+            System.out.print("" + iterator.data + " ");
+            iterator = iterator.next;
         }
         System.out.println();
     }

@@ -4,7 +4,7 @@ import collection.MyStack;
 
 public class Program {
     public static void main(String[] args) {
-        MyArrayList<String> list = new MyArrayList<>();
+        /*MyArrayList<String> list = new MyArrayList<>();
         list.add("a");
         list.add("b");
         list.add("c");
@@ -14,26 +14,27 @@ public class Program {
         list.add("g");
         list.add("h");
         list.show();
-        list.remove(4);
+        list.remove(5);
         list.show();
         System.out.println(list.get(4));
         list.clear();
         list.show();
-        System.out.println("--------------------");
+        System.out.println("--------------------");*/
 
-        MyLinkedList<String> link = new MyLinkedList<>();
+       /* MyLinkedList<String> link = new MyLinkedList<>();
         link.add("a");
         link.add("b");
         link.add("c");
         link.add("d");
         link.add("e");
         link.show();
-        link.remove(4);
+        link.remove(2);
         link.show();
-        System.out.println(link.get(4));
-        link.clear();
-        link.show();
+        System.out.println(link.size());
+        link.clear();        System.out.println(link.size());
 
+        link.show();
+*/
         System.out.println("--------------------");
         MyStack<String> steck = new MyStack<>();
         steck.push("a");
@@ -49,5 +50,6 @@ public class Program {
         steck.show();
         steck.clear();
         steck.show();
+
     }
 }
