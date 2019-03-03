@@ -73,8 +73,7 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public void clear() {
-        int oldSize = size;
-        for (int i = 0; i < oldSize; i++) {
+        for (int i = 0; i < size; i++) {
             remove(0);
         }
     }

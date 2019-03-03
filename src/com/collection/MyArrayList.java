@@ -30,13 +30,13 @@ public class MyArrayList<T> implements List<T> {
 
     @Override
     public void remove(int i) {
-        try{
+        try {
             T[] newArray = (T[]) new Object[size - 1];
             System.arraycopy(arrays, 0, newArray, 0, i);
             System.arraycopy(arrays, i + 1, newArray, i, size - i - 1);
             size--;
             arrays = newArray;
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Index is out of bound!");
         }
     }
@@ -53,9 +53,9 @@ public class MyArrayList<T> implements List<T> {
 
     @Override
     public T get(int i) {
-        try{
+        try {
             return arrays[i];
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Index  is out of bound!");
             return null;
         }
