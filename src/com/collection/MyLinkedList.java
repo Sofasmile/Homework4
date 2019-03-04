@@ -11,7 +11,18 @@ public class MyLinkedList<T> implements List<T> {
         size = 0;
     }
 
-    //addLast
+    private static class Node<T> {
+        public Node<T> prev;
+        public Node<T> next;
+        public T data;
+
+        public Node(Node<T> prev, T data, Node<T> next) {
+            this.prev = prev;
+            this.data = data;
+            this.next = next;
+        }
+    }
+
     @Override
     public void add(T item) {
         Node<T> newNode = new Node<>(last, item, null);
@@ -19,19 +30,16 @@ public class MyLinkedList<T> implements List<T> {
             first = newNode;
         }
         last.next = newNode;
+        newNode.prev = last;
         last = newNode;
         size++;
     }
 
     @Override
     public void remove(int i) {
-        try {
-            Node<T> x = getNode(i);
-            if (x != null) {
-                remove(x);
-            }
-        } catch (Exception e) {
-            System.out.println("Can't remove element with this index");
+        Node<T> x = getNode(i);
+        if (x != null) {
+            remove(x);
         }
     }
 
@@ -53,9 +61,9 @@ public class MyLinkedList<T> implements List<T> {
 
     }
 
-    private Node<T> getNode(int index) throws Exception {
+    private Node<T> getNode(int index) throws NodeIndexOutBoundaryException {
         if (index < 0 || index >= size) {
-            throw new Exception("Index is out of bound!");
+            throw new NodeIndexOutBoundaryException("Index is out of bound!");
         } else if (index < size / 2) {
             Node<T> item = first;
             for (int i = 0; i < index; i++) {
@@ -73,7 +81,8 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public void clear() {
-        for (int i = 0; i < size; i++) {
+        int oldSize = size;
+        for (int i = 0; i < oldSize; i++) {
             remove(0);
         }
     }
@@ -85,12 +94,8 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public T get(int i) {
-        try {
-            return getNode(i).data;
-        } catch (Exception e) {
-            System.out.println("Can't remove element with this index");
-            return null;
-        }
+        return getNode(i).data;
+
     }
 
     public void show() {

@@ -1,12 +1,22 @@
 package collection;
 
 public class MyStack<T> {
-    private NodeStack<T> head;
+    private Node<T> head;
     private int size;
 
     public MyStack() {
-        head = new NodeStack<>(null, null);
+        head = new Node<>(null, null);
         size = 0;
+    }
+
+    private static class Node<T> {
+        public Node<T> next;
+        public T data;
+
+        public Node(T data, Node<T> next) {
+            this.data = data;
+            this.next = next;
+        }
     }
 
     private boolean isEmpty() {
@@ -14,24 +24,25 @@ public class MyStack<T> {
     }
 
     public void push(T item) {
-        NodeStack<T> node = new NodeStack<>(item, head);
+        Node<T> node = new Node<>(item, head);
         head = node;
         size++;
     }
 
     public T pop() {
         if (isEmpty()) {
-            System.out.println("Steck is empty!");
+            throw new StackEmptyException("Stack is empty");
+        } else {
+            Node<T> temp = head;
+            head = head.next;
+            size--;
+            return temp.data;
         }
-        NodeStack<T> temp = head;
-        head = head.next;
-        size--;
-        return temp.data;
     }
 
     public T peek() {
         if (isEmpty()) {
-            System.out.println("Steck is empty!");
+            throw new StackEmptyException("Stack is empty");
         }
         return head.data;
     }
@@ -49,17 +60,15 @@ public class MyStack<T> {
 
     public void remove(int index) {
         if (isEmpty()) {
-            System.out.println("Steck is empty!");
-            return;
+            throw new StackEmptyException("Stack is empty");
         }
         if (index >= size || index < 0) {
-            System.out.println("Index " + index + " is out of bound!");
-            return;
+            throw new NodeIndexOutBoundaryException("Index is out of bound!");
         }
         if (index == 0) {
             pop();
         } else {
-            NodeStack<T> prev = head;
+            Node<T> prev = head;
             for (int i = 0; i < index - 1; i++) {
                 prev = prev.next;
             }
@@ -67,8 +76,8 @@ public class MyStack<T> {
         }
     }
 
-    private void remove(NodeStack<T> prev) {
-        NodeStack<T> node = prev.next;
+    private void remove(Node<T> prev) {
+        Node<T> node = prev.next;
         if (node.next == null) {
             prev.next = null;
         } else {
@@ -78,7 +87,7 @@ public class MyStack<T> {
     }
 
     public void show() {
-        NodeStack<T> item = head;
+        Node<T> item = head;
         for (int i = 0; i < size; i++) {
             System.out.print(item.data + " ");
             item = item.next;

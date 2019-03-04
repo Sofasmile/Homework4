@@ -1,6 +1,4 @@
-import collection.MyArrayList;
-import collection.MyLinkedList;
-import collection.MyStack;
+import collection.*;
 
 public class Program {
     public static void main(String[] args) {
@@ -28,9 +26,18 @@ public class Program {
         link.add("d");
         link.add("e");
         link.show();
-        link.remove(2);
+        try {
+            link.remove(4);
+        } catch (NodeIndexOutBoundaryException e) {
+            System.out.println(e.getMessage());
+        }
         link.show();
-        System.out.println(link.size());
+        try {
+            String s = link.get(2);
+            System.out.println(s);
+        } catch (NodeIndexOutBoundaryException e) {
+            System.out.println(e.getMessage());
+        }
         link.clear();
         System.out.println(link.size());
         link.show();
@@ -45,9 +52,24 @@ public class Program {
         steck.push("f");
         steck.show();
         System.out.println(steck.size());
-        System.out.println(steck.peek());
-        steck.pop();
+        try {
+            System.out.println(steck.peek());
+        } catch (StackEmptyException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            steck.pop();
+        } catch (StackEmptyException e) {
+            System.out.println(e.getMessage());
+        }
         steck.show();
+        try {
+            steck.remove(10);
+        } catch (NodeIndexOutBoundaryException e) {
+            System.out.println(e.getMessage());
+        } catch (StackEmptyException e) {
+            System.out.println(e.getMessage());
+        }
         steck.clear();
         steck.show();
 
