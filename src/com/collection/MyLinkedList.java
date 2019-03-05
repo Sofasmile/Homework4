@@ -61,7 +61,7 @@ public class MyLinkedList<T> implements List<T> {
 
     }
 
-    private Node<T> getNode(int index) throws NodeIndexOutBoundaryException {
+    private Node<T> getNode(int index) {
         if (index < 0 || index >= size) {
             throw new NodeIndexOutBoundaryException("Index is out of bound!");
         } else if (index < size / 2) {
